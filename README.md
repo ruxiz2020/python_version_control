@@ -39,26 +39,26 @@ The advantage of using pyenv is that you can manage multiple Python Versions wit
 pyenv version
 ```
 
-#### Install python version you need using pyenv
+#### 1. Install python version you need using pyenv
 
 Check existing versions available
 ```bash
 pyenv install --list | grep " 3\.[6789]"
 ```
 
-Install wanted version
+####  (WARNING!) Following install command failed for me
 ```bash
-pyenv install -v 3.9-dev
+pyenv install -v 3.8.2
 ```
 Above takes a little time to run.
-I got build failed error when trying to install python using pyenv on mac Majove V-10.14.6, and stackoverflow gave this solution:
-```bash
-SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk MACOSX_DEPLOYMENT_TARGET=10.14 pyenv install 3.7.3
+I got `build failed` error when trying to install python using pyenv on mac Majove V-10.14.6, and stackoverflow gave this solution:
 
-SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk MACOSX_DEPLOYMENT_TARGET=10.14 pyenv install 3.9.0a5
+####  2. Install wanted version, such as python 3.8.2
+```bash
+SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk MACOSX_DEPLOYMENT_TARGET=10.14 pyenv install 3.8.2
 ```
 
-Now check installed python versions
+#### 3. Now check installed python versions
 ```bash
 ls ~/.pyenv/versions/
 ```
@@ -68,20 +68,36 @@ rm -rf ~/.pyenv/versions/2.7.15
 ```
 Using your new python
 ```bash
-/Users/zruxi/.pyenv/versions/3.9.0a5/bin/python -V
+/Users/zruxi/.pyenv/versions/3.8.2/bin/python -V
 ```
 
-#### the global command does not work for me, but we can skip it for now.
+#### (WARNING!) the global command does not work for me, but we can skip it for now.
 If you want to use one of the python, then you can use the global command
 ```bash
-pyenv global 3.9.0a5
+pyenv global 3.8.2
 ```
 If this above global command not working, try this:
 ```bash
 eval "$(pyenv init -)"
 ```
 
-Install `pyenv-virtualenv`
+#### 4. Install `pyenv-virtualenv`
 ```bash
 brew install pyenv-virtualenv
 ```
+
+#### 5. Now we can create virtualenv using python inside of pyenv folder
+```bash
+virtualenv -p /Users/zruxi/.pyenv/versions/3.8.2/bin/python env
+```
+
+#### 6. Install kernel named `py382` using python3.8.2
+```bash
+env/bin/pip install jupyter
+env/bin/ipython kernel install --name "py382" --user
+```
+
+#### 7. Bring up jupyter and switch kernel to py382
+<div>
+<img src="switch_kernel_to_py382.png" width="430" height="310">
+</div>
