@@ -29,6 +29,15 @@ env/bin/jupyter notebook
 
 Then select shap3 from kernel dropdown in jupyter to work inside of the corresponding virtualenv.
 
+#### following worked for me for using python2
+```bash
+conda create -n my-conda-env                               # creates new virtual env
+conda activate my-conda-env                                # activate environment in terminal
+conda install ipykernel                                    # install Python kernel in new conda env
+ipython kernel install --user --name=my-conda-env-kernel   # configure Jupyter to use Python kernel
+jupyter notebook   
+```
+
 
 ## Method 2: using pyenv
 The advantage of using pyenv is that you can manage multiple Python Versions with pyenv!
